@@ -10,7 +10,8 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:shopdb;DB_CLOSE_DALEY=-1"/>
             <property name="javax.persistence.jdbc.user" value="admin"/>
             <property name="javax.persistence.jdbc.password" value=""/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.dialect" value="org.eclipse.persistence.platform.database.H2Dialect"/>
+            <property name="eclipselink.target-database" value="H2"/>
             <!--property name="eclipselink.logging.level" value="FINEST"/-->
             <property name="eclipselink.ddl-generation" value="drop-and-create"/>
 <!--            <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>-->
@@ -18,7 +19,7 @@
 <!--            <property name="eclipselink.ddl-generation.output-mode" value="both"/>-->
             <property name="eclipselink.showSQL" value="true"/>
             <property name="eclipselink.formatSQL" value="true"/>
-            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.logging.level" value="FINEST"/>
         </properties>
     </persistence-unit>
 </persistence>
