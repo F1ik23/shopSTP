@@ -1,17 +1,17 @@
-package com.example.repository;
+package com.example.shop.repository;
 
-import com.example.entity.Order;
+import com.example.shop.entity.Order;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import java.util.List;
 
 @Repository
 public class OrderRepository {
 
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("H2PersistenceUnit");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("H2Presistence");
 
     public List<Order> findByClientId(Integer id) {
         EntityManager em = emf.createEntityManager();

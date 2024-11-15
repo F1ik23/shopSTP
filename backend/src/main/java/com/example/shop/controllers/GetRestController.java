@@ -1,13 +1,13 @@
-package com.example.controllers;
+package com.example.shop.controllers;
 
-import com.example.entity.Client;
-import com.example.entity.Order;
-import com.example.repository.OrderRepository;
+import com.example.shop.entity.Client;
+import com.example.shop.entity.Order;
+import com.example.shop.repository.OrderRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
 @RestController
