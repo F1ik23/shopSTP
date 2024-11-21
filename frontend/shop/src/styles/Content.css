@@ -1,3 +1,5 @@
 .content {
-    display: grid;
+    display: block;
+    height: 75vh;
+    margin-top: 2%;
 }

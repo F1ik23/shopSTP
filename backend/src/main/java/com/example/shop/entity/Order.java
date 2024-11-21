@@ -13,21 +13,18 @@ import java.util.List;
 @Setter
 public class Order {
 
-    @ManyToOne
-    @JoinColumn(name = "Client_id")
-    private Client client;
-
-    @OneToMany
-    private List<Item> items;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Date")
     private Date date;
 
-    @Column(name = "State")
     private String state;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Item> items;
 }

@@ -4,7 +4,7 @@ import { Content } from './Content';
 
 function App() {
   return (
-    <div className='content'>
+    <div>
       <Navigation />
       <Content />
     </div>

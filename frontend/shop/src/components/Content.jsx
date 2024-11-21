@@ -1,12 +1,18 @@
 import "../styles/Content.css";
+import { Item } from "./Item";
+import { Route, Routes } from "react-router-dom";
+import { Product } from "./Product";
 
 export function Content() {
 
-    
 
-    return(
+
+    return (
         <div className="content">
-            
+            <Routes>
+                <Route path="/" element={<Item />} />
+                <Route path="/product" element={<Product />} />
+            </Routes>
         </div>
     )
 }

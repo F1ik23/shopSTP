@@ -3,7 +3,7 @@ import  itemReducer  from "./itemsSlice/itemSlice";
 import { api } from './api/api';
 
 const reducers = combineReducers({
-    getItems: userReducer,
+    getItems: itemReducer,
     [api.reducerPath]: api.reducer,
 })
 

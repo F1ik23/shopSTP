@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useGetItemsQuery } from "../api/api";
 
 const items = [];
 
@@ -9,13 +8,13 @@ export const itemSlice = createSlice({
         value: items,
     },
     reducers: {
-        setItem: (state, { payload }) => {
-            const {data} = useGetItemsQuery();
-            data.map((item) => {
-                var product = new Object(item);
-                state.items.push(product);
-            })
-        }
+        // setItem: (state, { payload }) => {
+        //     const {data} = useGetItemsQuery();
+        //     data.map((item) => {
+        //         var product = new Object(item);
+        //         state.items.push(product);
+        //     })
+        //}
     }
 });
 

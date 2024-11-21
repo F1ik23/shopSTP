@@ -6,11 +6,15 @@ export const api = createApi({
     tagTypes: ['Items', 'Users', 'Orders'],
     baseQuery: fetchBaseQuery({
         baseUrl: QUERY_URL,
-        credentials: 'include'
+        credentials: 'same-origin',
+        prepareHeaders: (headers) => {
+            headers.set("Content-Type", "application/json");
+            return headers;
+        }
     }),
     endpoints: builder => ({
         getItems: builder.query({
-            query: (params) => `/get-items`,
+            query: () => '/items/get',
             providesTags: () => [{
                 type: 'Items'
             }]
