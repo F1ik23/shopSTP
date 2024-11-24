@@ -1,4 +1,4 @@
-import "../styles/Content.css";
+import "../../styles/Content.css";
 import { Item } from "./Item";
 import { Route, Routes } from "react-router-dom";
 import { Product } from "./Product";
@@ -11,7 +11,7 @@ export function Content() {
         <div className="content">
             <Routes>
                 <Route path="/" element={<Item />} />
-                <Route path="/product" element={<Product />} />
+                <Route path="/products" element={<Product />} />
             </Routes>
         </div>
     )

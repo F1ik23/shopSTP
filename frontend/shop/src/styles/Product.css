@@ -1,4 +1,116 @@
-.product-actions {
-    width: 3vw;
-    background-color: #e8e8e8;
+.product-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
+
+.product-actions {
+    width: 100%;
+    background: #e8e8e8;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
+}
+
+.product-actions .action-button {
+    background-color: #ffffff;
+    color: #333333;
+    border: none;
+    padding: 5px 5px;
+    margin-right: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.product-actions .action-button:hover {
+    background-color: #f1f1f1;
+    color: #333333;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.product-actions .action-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+.table-prod {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    padding: 20px; 
+    border-radius: 0 0 10px 10px; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+}
+
+
+.table-prod table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #dcdcdc; 
+    border-radius: 10px; 
+}
+
+/* Стиль для заголовков таблицы */
+.table-prod th {
+    background-color: #4c70f1; 
+    color: #ffffff; 
+    padding: 12px 15px; 
+    text-align: center; 
+    font-weight: bold;
+    border: 1px solid #dcdcdc; 
+    border-radius: 0 0 10px 10px; 
+}
+
+
+.table-prod td {
+    text-align: center;
+    border: 1px solid #dcdcdc; 
+    padding: 10px; 
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    transition: background-color 0.3s ease; 
+}
+
+
+.table-prod th:first-child, .table-prod td:first-child {
+    width: 50px; 
+}
+
+
+.table-prod tr:hover {
+    background-color: #f1f1f1;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.table-prod table tr.selected {
+    background-color: #d1e7fd;
+    border: 2px solid #007bff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  }
+  
+  .table-prod table tr:hover {
+    cursor: pointer;
+    background-color: #f8f9fa;
+  }
+  
+

@@ -1,5 +1,5 @@
-import { useGetItemsQuery } from "../store/api/api";
-import "../styles/Item.css";
+import { useGetItemsQuery } from "../../store/api/api";
+import "../../styles/Item.css";
 
 
 const GridItem = ({ item }) => {

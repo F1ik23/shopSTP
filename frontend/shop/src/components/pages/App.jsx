@@ -1,4 +1,4 @@
-import '../styles/App.css';
+import '../../styles/App.css';
 import { Navigation } from './Navigation';
 import { Content } from './Content';
 

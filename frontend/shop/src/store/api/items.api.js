@@ -7,6 +7,7 @@ export const itemsApi = api.injectEndpoints({
             query: (body) => ({
                 url: '/items/set',
                 method: 'POST',
+                body: body,
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
