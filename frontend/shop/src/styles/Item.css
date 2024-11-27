@@ -1,0 +1,14 @@
+.items-grid { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.grid-child {
+    background: #e8e8e8;
+    border: 1px solic #ccc;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
