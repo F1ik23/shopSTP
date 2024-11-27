@@ -6,9 +6,9 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -24,5 +24,12 @@ public class ItemRepository {
         Root<Item> root = query.from(Item.class);
         query.select(root);
         return entityManager.createQuery(query).getResultList();
+    }
+
+    @Transactional
+    public Long save(Item item) {
+        if (item.getId() == null) entityManager.persist(item);
+        else entityManager.merge(item);
+        return item.getId();
     }
 }

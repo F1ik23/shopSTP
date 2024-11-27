@@ -23,4 +23,8 @@ public class ItemService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
         }
     }
+
+    public void setItem(Item item) {
+        itemRepository.save(item);
+    }
 }

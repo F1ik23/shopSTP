@@ -11,9 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 public class ClientService {
     private ClientRepository clientRepository;
 
-    public Integer setClient(Client clientBody) {
+    public Long setClient(Client clientBody) {
         try {
-            Integer id = clientRepository.save(clientBody);
+            Long id = clientRepository.save(clientBody);
             return id;
         }
         catch (Exception ex) {

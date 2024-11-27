@@ -1,10 +1,14 @@
 package com.example.shop.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Item")
 @Getter
@@ -13,7 +17,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private Double cost;
 
@@ -26,4 +30,11 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "Order_id")
     private Order order;
+
+    public Item(Double cost, String name, Integer count, Double countUnit) {
+        this.cost = cost;
+        this.count = count;
+        this.name = name;
+        this.countUnit = countUnit;
+    }
 }

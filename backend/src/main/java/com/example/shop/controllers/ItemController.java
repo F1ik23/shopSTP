@@ -1,6 +1,5 @@
 package com.example.shop.controllers;
 
-import com.example.shop.entity.Client;
 import com.example.shop.entity.Item;
 import com.example.shop.services.ItemService;
 import lombok.AllArgsConstructor;
@@ -19,5 +18,11 @@ public class ItemController {
     @GetMapping("/get")
     public List<Item> getAllItems() {
         return itemService.getAllItems();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/set")
+    public void setItem(@RequestBody Item item) {
+        itemService.setItem(item);
     }
 }
