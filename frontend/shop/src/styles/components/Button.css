@@ -1,0 +1,33 @@
+.action-button {
+    background-color: #ffffff;
+    color: #333333;
+    border: none;
+    padding: 5px 5px;
+    margin-right: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #f1f1f1;
+    color: #333333;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.action-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.disabled-button {
+    background-color: #747474;
+    color: #333333;
+    border: none;
+    padding: 5px 5px;
+    margin-right: 15px;
+    font-size: 14px;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+}

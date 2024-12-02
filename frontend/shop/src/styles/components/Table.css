@@ -1,0 +1,129 @@
+.table-prod {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.table-prod table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+}
+
+/* Стиль для заголовков таблицы */
+.table-prod thead {
+    background-color: #e8e8e8;
+    color: #474747;
+    padding: 12px 15px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #dcdcdc;
+    border-radius: 0 0 10px 10px;
+}
+
+
+.table-prod td {
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    padding: 10px;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
+}
+
+
+.table-prod thead:first-child,
+.table-prod td:first-child {
+    width: 50px;
+}
+
+
+.table-prod tr:hover {
+    background-color: #f1f1f1;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.table-prod table tr.selected {
+    background-color: #d1e7fd;
+    border: 2px solid #007bff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+.table-prod table tr:hover {
+    cursor: pointer;
+    background-color: #f8f9fa;
+}
+
+
+/* Адаптивные стили */
+@media(max-width: 768px) {
+    .table-prod {
+        padding: 10px;
+    }
+
+    .table-prod table {
+        border: none;
+        border-radius: 5px;
+    }
+
+    .table-prod th,
+    .table-prod td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    /* Уменьшаем шрифт и padding */
+    .table-prod th {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    /* Строки таблицы будут иметь возможность прокрутки по горизонтали */
+    .table-prod table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-prod td {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .table-prod th,
+    .table-prod td {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    /* Добавление еще больше прокрутки для очень маленьких экранов */
+    .table-prod table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Еще больше уменьшение padding для мобильных телефонов */
+    .table-prod th,
+    .table-prod td {
+        padding: 5px;
+        font-size: 12px;
+    }
+}
