@@ -17,7 +17,6 @@ public class ItemRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     public List<Item> getAllItems() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Item> query = cb.createQuery(Item.class);
@@ -28,11 +27,15 @@ public class ItemRepository {
 
     @Transactional
     public Long save(Item item) {
-        System.out.println("Item:" + item.toString());
         if (item.getId() == null) {
-            System.out.println("Found!");
             entityManager.persist(item);}
         else entityManager.merge(item);
         return item.getId();
+    }
+
+    @Transactional
+    public void delete(Item item) {
+        Item foundItem = entityManager.find(Item.class, item.getId());
+        entityManager.remove(foundItem);
     }
 }

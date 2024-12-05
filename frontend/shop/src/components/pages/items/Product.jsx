@@ -1,10 +1,9 @@
 import { useDispatch } from "react-redux";
-import { useGetItemsQuery } from "../../store/api/api";
-import "../../styles/Product.css";
-import { ActionBar } from "../additional/ActionBar";
+import { useGetItemsQuery } from "../../../store/api/api";
+import { ActionBar } from "./ActionBar";
 import { useState } from "react";
-import { actions } from "../../store/itemsSlice/itemSlice";
-import Table from "../diff_comps/Table";
+import { actions } from "../../../store/itemsSlice/itemSlice";
+import Table from "../../diff_comps/Table";
 
 
 export function Product() {

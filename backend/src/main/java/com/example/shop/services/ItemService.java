@@ -27,4 +27,13 @@ public class ItemService {
     public void setItem(Item item) {
         itemRepository.save(item);
     }
+
+    public void deleteItem(Item item) {
+        try {
+            itemRepository.delete(item);
+        }
+        catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+        }
+    }
 }

@@ -85,6 +85,7 @@
     .table-prod td {
         padding: 8px;
         font-size: 14px;
+        width: 100%;
     }
 
     /* Уменьшаем шрифт и padding */

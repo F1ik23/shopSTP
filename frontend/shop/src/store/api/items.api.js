@@ -14,8 +14,18 @@ export const itemsApi = api.injectEndpoints({
                 type: 'Items',
             }],
         }),
-
+        deleteItem: builder.mutation({
+            query: (body) => ({
+                url: '/items/delete',
+                method: 'DELETE',
+                body: body,
+                mode: 'cors'
+            }),
+            invalidatesTags: () => [{
+                type: 'Items',
+            }],
+        })
     })
 })
 
-export const {useSetItemMutation} = itemsApi;
+export const {useSetItemMutation, useDeleteItemMutation} = itemsApi;

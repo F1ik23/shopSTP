@@ -25,4 +25,8 @@ public class ItemController {
     public void setItem(@RequestBody Item item) {
         itemService.setItem(item);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @DeleteMapping("/delete")
+    public void deleteItem(@RequestBody Item item) { itemService.deleteItem(item); }
 }

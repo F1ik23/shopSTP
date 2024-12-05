@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
-import Modal from "../diff_comps/Modal";
-import "../../styles/Product.css"
-import Input from "../diff_comps/Input";
-import { useSetItemMutation } from "../../store/api/items.api";
-import InputNumber from "../diff_comps/InputNumber";
+import Modal from "../../../diff_comps/Modal";
+import { useSetItemMutation } from "../../../../store/api/items.api";
+import Input from "../../../diff_comps/Input";
+import InputNumber from "../../../diff_comps/InputNumber";
 
 
 export function AddButton() {
