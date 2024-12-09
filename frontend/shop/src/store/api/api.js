@@ -21,10 +21,24 @@ export const api = createApi({
                 type: 'Items'
             }]
         }),
+        getClients: builder.query({
+            query: () => '/clients/get',
+            providesTags: () => [{
+                type: 'Users'
+            }]
+        }),
+        getOrders: builder.query({
+            query: () => '/orders/get',
+            providesTags: () => [{
+                type: 'Orders'
+            }]
+        }),
     }),
 })
 
 export const {
-    useGetItemsQuery
+    useGetItemsQuery,
+    useGetClientsQuery,
+    useGetOrdersQuery
 } = api;
 

@@ -14,16 +14,6 @@ import java.util.List;
 public class ClientService {
 
     private ClientRepository clientRepository;
-
-//    public Long setClient(Client clientBody) {
-//        try {
-//            Long id = clientRepository.save(clientBody);
-//            return id;
-//        }
-//        catch (Exception ex) {
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
-//        }
-//    }
     public List<Client> getAllClients() {
         try {
             List<Client> allClients = clientRepository.getAllClients();

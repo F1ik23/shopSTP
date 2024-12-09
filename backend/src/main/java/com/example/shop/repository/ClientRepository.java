@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,7 @@ public class ClientRepository {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Client> query = cb.createQuery(Client.class);
         Root<Client> root = query.from(Client.class);
+        root.fetch("order", JoinType.LEFT);
         query.select(root);
         return entityManager.createQuery(query).getResultList();
     }

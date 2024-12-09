@@ -3,6 +3,10 @@ package com.example.shop.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.eclipse.persistence.annotations.BatchFetch;
+import org.eclipse.persistence.annotations.BatchFetchType;
+import org.eclipse.persistence.annotations.JoinFetch;
+import org.eclipse.persistence.annotations.JoinFetchType;
 
 import java.util.List;
 
@@ -26,5 +30,6 @@ public class Client {
     private String sex;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @BatchFetch(BatchFetchType.JOIN)
     private List<Order> order;
 }

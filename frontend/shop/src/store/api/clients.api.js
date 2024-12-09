@@ -16,15 +16,18 @@ export const clientApi = api.injectEndpoints({
                 type: 'Users',
             }]
         }),
-
-        getClients: builder.query({
-            query: () => '/clients/get',
-            invalidatesTags: [{
-                type: 'Users'
-            }]
+        deleteClient: builder.mutation({
+            query: (body) => ({
+                url: '/clients/delete',
+                method: 'DELETE',
+                body: body,
+                mode: 'cors'
+            }),
+            invalidatesTags: () => [{
+                type: 'Users',
+            }],
         })
-        
     })
 })
 
-export const {useGetClientsQuery, useSetClientMutation} = clientApi;
+export const {useSetClientMutation, useDeleteClientMutation} = clientApi;

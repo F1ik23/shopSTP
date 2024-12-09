@@ -1,41 +1,34 @@
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import Modal from "../../../diff_comps/Modal";
+import { useSetItemMutation } from "../../../../store/api/items.api";
 import Input from "../../../diff_comps/Input";
 import InputNumber from "../../../diff_comps/InputNumber";
-import { useSetClientMutation } from "../../../../store/api/clients.api";
-import MaskedInput from "../../../diff_comps/MaskedInput";
-import Select from "../../../diff_comps/Select";
 
 
 export function AddButton() {
 
     const [open, setOpen] = useState(false);
 
-    const [setClient] = useSetClientMutation();
-
-    const sex = [
-        { label: 'Мужской', value: 'Мужской' }, 
-        { label: 'Женский', value: 'Женский' }
-    ]
+    const [setItem] = useSetItemMutation();
 
     const [body, setBody] = useState({
         name: '',
-        phone: '',
-        age: '',
-        sex: ''
+        cost: '',
+        count: '',
+        countUnit: ''
     })
 
     const handleClickAdd = () => {
         setOpen(true);
     }
     const handleAdd = () => {
-        setClient(body).then(() => {
+        setItem(body).then(() => {
             setOpen(false);
             body.name = '';
-            body.phone = '';
-            body.age = '';
-            body.sex = '';
+            body.cost = '';
+            body.count = '';
+            body.countUnit = '';
         });
 
     }
@@ -48,10 +41,10 @@ export function AddButton() {
                     <h2>Добавление</h2>
                 </Modal.Header>
                 <Modal.Body>
-                    <Input label="Имя" onChange={(e) => setBody({ ...body, name: e })} />
-                    <MaskedInput value="+7" mask="+0(000)000-00-00" label="Телефон" onChange={(e) => setBody({ ...body, phone: e })} />
-                    <Select label="Пол" data={sex} onChange={(e) => setBody({ ...body, sex: e })} />
-                    <InputNumber min="1" max="150" label="Возраст" onChange={(e) => setBody({ ...body, age: e })} />                    
+                    <Input label="Название" onChange={(e) => setBody({ ...body, name: e })} />
+                    <InputNumber min="1" label="Стоимость" allowDecimal onChange={(e) => setBody({ ...body, cost: e })} />
+                    <InputNumber min="1" label="Количество (в шт.)" onChange={(e) => setBody({ ...body, count: e })} />
+                    <InputNumber min="1" label="Количество (в кг)" allowDecimal onChange={(e) => setBody({ ...body, countUnit: e })} />
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="action-button" onClick={handleAdd}>Добавить</button>

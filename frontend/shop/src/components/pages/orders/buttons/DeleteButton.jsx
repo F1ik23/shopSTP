@@ -2,14 +2,14 @@ import { IoIosRemove } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Modal from "../../../diff_comps/Modal";
-import { useDeleteClientMutation } from "../../../../store/api/clients.api";
+import { useDeleteItemMutation } from "../../../../store/api/items.api";
 
 
 export function DeleteButton() {
 
     const item = useSelector(state => state.items.value);
     const [open, setOpen] = useState(false);
-    const [deleteClient] = useDeleteClientMutation();
+    const [deleteItem] = useDeleteItemMutation();
 
     const classButton = item.name === '' ? 'disabled-button' : 'action-button';
     const disable = item.name === '' ? true : false;
@@ -26,7 +26,7 @@ export function DeleteButton() {
     }
 
     const handleDelete = () => {
-        deleteClient(body).then(() => {
+        deleteItem(body).then(() => {
             setOpen(false);
         });
     }
@@ -39,7 +39,7 @@ export function DeleteButton() {
                     <h2>Удаление</h2>
                 </Modal.Header>
                     <Modal.Body>
-                        <p>Вы действительно хотите удалить клиента {item.name}?</p>
+                        <p>Вы действительно хотите удалить товар {item.name} стоимостью {item.cost}?</p>
                     </Modal.Body>
                 <Modal.Footer>
                     <button className="action-button" onClick={handleDelete}>Удалить</button>

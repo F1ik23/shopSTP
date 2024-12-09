@@ -28,7 +28,7 @@ public class Item {
     private Double countUnit;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Order_id")
+    @JoinColumn(name = "Orders_id")
     private Order order;
 
     public Item(Double cost, String name, Integer count, Double countUnit) {

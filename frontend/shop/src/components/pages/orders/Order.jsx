@@ -1,12 +1,13 @@
-import { useGetClientsQuery } from "../../../store/api/api";
 import { useDispatch } from "react-redux";
+import { useGetItemsQuery } from "../../../store/api/api";
 import { ActionBar } from "./ActionBar";
 import { useState } from "react";
 import { actions } from "../../../store/itemsSlice/itemSlice";
 import Table from "../../diff_comps/Table";
 
-export function Client() {
-    const {data} = useGetClientsQuery();
+
+export function Order() {
+    const { data } = useGetItemsQuery();
 
     const dispatch = useDispatch();
 
@@ -22,22 +23,18 @@ export function Client() {
             <div className="product-actions">
                 <ActionBar />
             </div>
-            <Table data={data} nullData="Клиентов пока нет..." onRowClick={handleRowClick} numbered>
+            <Table data={data} nullData="Заказов пока нет..." onRowClick={handleRowClick} numbered>
                 <Table.Column>
-                    <Table.HeaderCell>Имя</Table.HeaderCell>
+                    <Table.HeaderCell>Заказчик</Table.HeaderCell>
                     <Table.Cell dataKey="name" fullText />
                 </Table.Column>
                 <Table.Column>
-                    <Table.HeaderCell>Телефон</Table.HeaderCell>
-                    <Table.Cell dataKey="phone" fullText />
+                    <Table.HeaderCell>Дата</Table.HeaderCell>
+                    <Table.Cell dataKey="date" fullText />
                 </Table.Column>
                 <Table.Column>
-                    <Table.HeaderCell>Возраст</Table.HeaderCell>
-                    <Table.Cell dataKey="age" fullText />
-                </Table.Column>
-                <Table.Column>
-                    <Table.HeaderCell>Пол</Table.HeaderCell>
-                    <Table.Cell dataKey="sex" fullText />
+                    <Table.HeaderCell>Состояние</Table.HeaderCell>
+                    <Table.Cell dataKey="state" fullText />
                 </Table.Column>
             </Table>
         </div>
