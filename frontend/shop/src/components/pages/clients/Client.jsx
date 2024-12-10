@@ -10,11 +10,11 @@ export function Client() {
 
     const dispatch = useDispatch();
 
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem, setSelected] = useState(null);
 
     const handleRowClick = (item) => {
-        setSelectedItem(item === selectedItem ? null : item);
-        dispatch(actions.setItem(item));
+        setSelected(item === selectedItem ? null : item);
+        dispatch(actions.setSelectedItem(item));
     };
 
     return (

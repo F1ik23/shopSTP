@@ -26,8 +26,11 @@ export const clientApi = api.injectEndpoints({
             invalidatesTags: () => [{
                 type: 'Users',
             }],
+        }),
+        getRandomClient: builder.query({
+            query: () => '/clients/random',
         })
     })
 })
 
-export const {useSetClientMutation, useDeleteClientMutation} = clientApi;
+export const {useSetClientMutation, useDeleteClientMutation, useGetRandomClientQuery} = clientApi;

@@ -23,13 +23,14 @@ export function AddButton() {
         setOpen(true);
     }
     const handleAdd = () => {
-        setItem(body).then(() => {
+        setItem(body).unwrap().then(() => {
             setOpen(false);
             body.name = '';
             body.cost = '';
             body.count = '';
             body.countUnit = '';
-        });
+        })
+        .catch((error) => alert(error.status + ' ' + error.data.message))
 
     }
 

@@ -1,34 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const item = {
-    id: '',
-    name: '',
-    cost: '',
-    count: '',
-    countUnit: ''
-};
+const initialState = [];
 
 export const itemSlice = createSlice({
-    name: 'items',
-    initialState: {
-        value: item,
-    },
+    name: 'cart',
+    initialState,
     reducers: {
-        setItem: (state, { payload: item }) => {
-            if (state.value.id === item.id) {
-                state.value.id = '';
-                state.value.name = '';
-                state.value.cost = '';
-                state.value.count = '';
-                state.value.countUnit = '';
+        addToCartItem: (state, { payload: item }) => {
+            const isExists = state.some (r => r.id === item.id)
+            if(isExists) {
+                const index = state.findIndex(items => items.id === item.id)
+                if (index !== -1) {
+                    state.splice(index, 1);
+                }
             }
-            else { state.value = item; }
-            console.log(item);
+            else
+                state.push(item)
         }
     }
 });
-
-// export const {actions, reducer} = userSlice;
 
 export const { actions, reducer } = itemSlice;
 

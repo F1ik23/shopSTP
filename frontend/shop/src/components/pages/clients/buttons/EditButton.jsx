@@ -11,12 +11,12 @@ import Select from "../../../diff_comps/Select";
 
 export function EditButton() {
 
-    const item = useSelector(state => state.items.value);
+    const selected = useSelector(state => state.selected.value);
     const [open, setOpen] = useState(false);
     const [setClient] = useSetClientMutation();
 
-    const classButton = item.name === '' ? 'disabled-button' : 'action-button';
-    const disable = item.name === '' ? true : false;
+    const classButton = selected.name === '' ? 'disabled-button' : 'action-button';
+    const disable = selected.name === '' ? true : false;
 
     const sex = [
         { label: 'Мужской', value: 'Мужской' }, 
@@ -26,8 +26,8 @@ export function EditButton() {
     const [body, setBody] = useState(null)
 
     useEffect(() => {
-        setBody(item);
-    }, [item]);
+        setBody(selected);
+    }, [selected]);
     
 
     const handleClickEdit = () => {

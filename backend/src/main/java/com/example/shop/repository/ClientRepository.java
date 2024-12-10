@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Random;
 
 @Repository
 public class ClientRepository {
@@ -41,5 +42,15 @@ public class ClientRepository {
         entityManager.remove(foundClient);
     }
 
+    public Client getRandomClient() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Client> query = cb.createQuery(Client.class);
+        Root<Client> root = query.from(Client.class);
+        root.fetch("order", JoinType.LEFT);
+        query.select(root);
+        List<Client> allClients = entityManager.createQuery(query).getResultList();
+        Random rand = new Random();
+        return allClients.get(rand.nextInt(allClients.size()));
+    }
 
 }

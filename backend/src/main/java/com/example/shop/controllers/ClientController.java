@@ -29,4 +29,10 @@ public class ClientController {
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/delete")
     public void deleteClient(@RequestBody Client client) { clientService.deleteClient(client); }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/random")
+    public Client getRandomClient() {
+        return clientService.getRandomClient();
+    }
 }

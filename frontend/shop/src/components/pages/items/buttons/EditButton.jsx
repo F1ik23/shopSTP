@@ -9,18 +9,20 @@ import { useSetItemMutation } from "../../../../store/api/items.api";
 
 export function EditButton() {
 
-    const item = useSelector(state => state.items.value);
+    const selected = useSelector(state => state.selected.value);
     const [open, setOpen] = useState(false);
     const [setItem] = useSetItemMutation();
 
-    const classButton = item.name === '' ? 'disabled-button' : 'action-button';
-    const disable = item.name === '' ? true : false;
+    console.log(selected);
+
+    const classButton = selected.id === '' ? 'disabled-button' : 'action-button';
+    const disable = selected.id === '' ? true : false;
 
     const [body, setBody] = useState(null)
 
     useEffect(() => {
-        setBody(item);
-    }, [item]);
+        setBody(selected);
+    }, [selected]);
     
 
     const handleClickEdit = () => {

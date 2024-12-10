@@ -30,14 +30,15 @@ export function AddButton() {
         setOpen(true);
     }
     const handleAdd = () => {
-        setClient(body).then(() => {
+        setClient(body).unwrap()
+        .then(() => {
             setOpen(false);
             body.name = '';
             body.phone = '';
             body.age = '';
             body.sex = '';
-        });
-
+        })
+        .catch((error) => alert(error.status + ' ' + error.data.message))
     }
 
     return (

@@ -12,8 +12,22 @@ import '../../styles/components/Table.css';
 import '../../styles/components/Select.css';
 import { Navigation } from './Navigation';
 import { Content } from './Content';
+import { useDispatch } from 'react-redux';
+import { useGetRandomClientQuery } from '../../store/api/clients.api';
+import { actions } from '../../store/clientSlice/clientSlice';
+import { useEffect } from 'react';
 
 function App() {
+
+  const {refetch} = useGetRandomClientQuery();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    var data = refetch();
+    dispatch(actions.createClient(data));
+  }, [])
+  
+
   return (
     <div>
       <Navigation />

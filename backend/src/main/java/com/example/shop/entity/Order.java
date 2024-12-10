@@ -16,14 +16,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Orders")
-@Getter
-@Setter
-public class Order {
+    @Table(name = "Orders")
+    @Getter
+    @Setter
+    public class Order {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
     private Date date;
 
@@ -33,7 +33,7 @@ public class Order {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE, orphanRemoval = true)
     @BatchFetch(BatchFetchType.JOIN)
     private List<Item> items;
 }

@@ -33,3 +33,49 @@
     border: #b8b8b8 solid 1px;
     margin: 5px 0;
 }
+
+.cart-line {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px 0;
+}
+
+.cart-button {
+    width: 50px;
+    aspect-ratio: 1;
+}
+
+.cart-text {
+    font-size: 16px;
+    padding: 0 0 0 5px;
+}
+
+.order-button {
+    margin: 0 0 0 5px;
+    background-color: #ffffff;
+    color: #333333;
+    border: #cfcfcf solid 1px;
+    padding: 5px 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.order-button:hover {
+    background-color: #f1f1f1;
+    color: #333333;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.order-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.no-clients {
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+    font-size: 20px;
+    font-weight: 500;
+}

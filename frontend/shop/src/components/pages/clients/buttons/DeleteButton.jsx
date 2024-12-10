@@ -7,18 +7,18 @@ import { useDeleteClientMutation } from "../../../../store/api/clients.api";
 
 export function DeleteButton() {
 
-    const item = useSelector(state => state.items.value);
+    const selected = useSelector(state => state.selected.value);
     const [open, setOpen] = useState(false);
     const [deleteClient] = useDeleteClientMutation();
 
-    const classButton = item.name === '' ? 'disabled-button' : 'action-button';
-    const disable = item.name === '' ? true : false;
+    const classButton = selected.name === '' ? 'disabled-button' : 'action-button';
+    const disable = selected.name === '' ? true : false;
 
     const [body, setBody] = useState(null)
 
     useEffect(() => {
-        setBody(item);
-    }, [item]);
+        setBody(selected);
+    }, [selected]);
     
 
     const handleClickEdit = () => {
@@ -39,7 +39,7 @@ export function DeleteButton() {
                     <h2>Удаление</h2>
                 </Modal.Header>
                     <Modal.Body>
-                        <p>Вы действительно хотите удалить клиента {item.name}?</p>
+                        <p>Вы действительно хотите удалить клиента {selected.name}?</p>
                     </Modal.Body>
                 <Modal.Footer>
                     <button className="action-button" onClick={handleDelete}>Удалить</button>

@@ -36,4 +36,13 @@ public class ClientService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
         }
     }
+
+    public Client getRandomClient() {
+        try {
+            return clientRepository.getRandomClient();
+        }
+        catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "В системе не существует ни одного клиента.");
+        }
+    }
 }
