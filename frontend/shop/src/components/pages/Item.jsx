@@ -33,12 +33,12 @@ export function Item() {
 
     const { cart } = useSelector(state => state);
 
-    const client  = useSelector(state => state.client.value);
-    console.log(client)
+    const client = useSelector(state => state.client.value);
 
     return (
-        (client.id !== '') ? (
-            <>
+        (client.id !== '' && client.id !== undefined)
+            ?
+            (<>
                 <Cart />
                 <div className="items-grid">
                     {data && data.map((item) => (

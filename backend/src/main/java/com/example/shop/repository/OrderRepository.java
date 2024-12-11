@@ -22,7 +22,7 @@ public class OrderRepository {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Order> query = cb.createQuery(Order.class);
         Root<Order> root = query.from(Order.class);
-        root.fetch("item", JoinType.LEFT);
+        root.fetch("items", JoinType.LEFT);
         query.select(root);
         return entityManager.createQuery(query).getResultList();
     }

@@ -23,7 +23,6 @@ public class ClientRepository {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Client> query = cb.createQuery(Client.class);
         Root<Client> root = query.from(Client.class);
-        root.fetch("order", JoinType.LEFT);
         query.select(root);
         return entityManager.createQuery(query).getResultList();
     }
@@ -46,7 +45,6 @@ public class ClientRepository {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Client> query = cb.createQuery(Client.class);
         Root<Client> root = query.from(Client.class);
-        root.fetch("order", JoinType.LEFT);
         query.select(root);
         List<Client> allClients = entityManager.createQuery(query).getResultList();
         Random rand = new Random();

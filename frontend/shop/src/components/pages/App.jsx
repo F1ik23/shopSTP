@@ -19,13 +19,16 @@ import { useEffect } from 'react';
 
 function App() {
 
-  const {refetch} = useGetRandomClientQuery();
+  const {data, refetch} = useGetRandomClientQuery();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    var data = refetch();
-    dispatch(actions.createClient(data));
-  }, [])
+  dispatch(actions.createClient(data));
+
+  // useEffect(() => {
+  //   refetch();
+  //   console.log(data);
+    
+  // }, [])
   
 
   return (

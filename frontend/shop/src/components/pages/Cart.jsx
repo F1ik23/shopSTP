@@ -7,7 +7,7 @@ import { useSetOrderMutation } from "../../store/api/orders.api";
 export const Cart = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { cart } = useSelector(state => state);
-    const { client } = useSelector(state => state);
+    const client = useSelector(state => state.client.value);
 
     const [setOrder] = useSetOrderMutation();
 
@@ -24,7 +24,7 @@ export const Cart = () => {
             const body = {
                 date: new Date(),
                 state: 'WAITING',
-                client_id: client.id,
+                client: client,
                 items: cart
             }
             setOrder(body).unwrap()

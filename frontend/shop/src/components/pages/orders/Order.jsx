@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
-import { useGetItemsQuery } from "../../../store/api/api";
+import { useGetOrdersQuery } from "../../../store/api/api";
 import { ActionBar } from "./ActionBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { actions } from "../../../store/itemsSlice/itemSlice";
 import Table from "../../diff_comps/Table";
 
 
 export function Order() {
-    const { data } = useGetItemsQuery();
+    const { data } = useGetOrdersQuery();
 
     const dispatch = useDispatch();
 
@@ -17,6 +17,7 @@ export function Order() {
         setSelected(item === selectedItem ? null : item);
         dispatch(actions.setSelectedItem(item));
     };
+   
 
     return (
         <div className="product-content">

@@ -17,17 +17,17 @@ public class OrderController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get")
-    public List<Order> getAllClients() {
+    public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/set")
-    public void setClient(@RequestBody Order order) {
+    public void setOrder(@RequestBody Order order) {
         orderService.setOrder(order);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/delete")
-    public void deleteClient(@RequestBody Order order) { orderService.deleteOrder(order); }
+    public void deleteOrder(@RequestBody Order order) { orderService.deleteOrder(order); }
 }

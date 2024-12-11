@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import org.eclipse.persistence.annotations.BatchFetch;
 import org.eclipse.persistence.annotations.BatchFetchType;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,11 +30,11 @@ import java.util.List;
 
     private State state;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE, orphanRemoval = true)
-    @BatchFetch(BatchFetchType.JOIN)
-    private List<Item> items;
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JoinColumn(name = "item_id")
+    private List<Item> items = new ArrayList<>();
 }
