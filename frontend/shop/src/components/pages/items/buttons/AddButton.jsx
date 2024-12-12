@@ -30,7 +30,12 @@ export function AddButton() {
             body.count = '';
             body.countUnit = '';
         })
-        .catch((error) => alert(error.status + ' ' + error.data.message))
+        .catch((error) => {
+            if(error.status === 'FETCH_ERROR') {
+                alert('Проблема с подключением к серверу');
+            }
+            else alert(error.status + ' ' + error.data.message)
+        })
 
     }
 

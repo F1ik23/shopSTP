@@ -1,8 +1,9 @@
 import { IoIosRemove } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Modal from "../../../diff_comps/Modal";
 import { useDeleteItemMutation } from "../../../../store/api/items.api";
+import { actions } from "../../../../store/selectedSlice/selectedSlice";
 
 
 export function DeleteButton() {
@@ -10,6 +11,8 @@ export function DeleteButton() {
     const selected = useSelector(state => state.selected.value);
     const [open, setOpen] = useState(false);
     const [deleteItem] = useDeleteItemMutation();
+
+    const dispatch = useDispatch();
 
     const classButton = selected.name === '' ? 'disabled-button' : 'action-button';
     const disable = selected.name === '' ? true : false;
@@ -26,9 +29,14 @@ export function DeleteButton() {
     }
 
     const handleDelete = () => {
-        deleteItem(body).then(() => {
+        deleteItem(body).unwrap()
+        .then(() => {
+            dispatch(actions.clearSelectedItem());
             setOpen(false);
-        });
+        })
+        .catch((error) => {
+            alert(error.data.message);
+        })
     }
 
     return (

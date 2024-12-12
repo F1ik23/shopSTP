@@ -13,8 +13,6 @@ export function EditButton() {
     const [open, setOpen] = useState(false);
     const [setItem] = useSetItemMutation();
 
-    console.log(selected);
-
     const classButton = selected.id === '' ? 'disabled-button' : 'action-button';
     const disable = selected.id === '' ? true : false;
 

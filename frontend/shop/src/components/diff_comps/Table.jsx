@@ -95,7 +95,7 @@ const Table = ({
                 <table>
                     {/* Заголовок таблицы */}
                     <thead>
-                        {numbered && <th style={{width: "50px"}}>№</th>}
+                        {numbered && <th style={{ width: "50px" }}>№</th>}
                         {React.Children.map(children, (child) => {
                             if (React.isValidElement(child) && child.type === Column) {
                                 const { sortable, align, flexGrow } = child.props;
@@ -124,7 +124,7 @@ const Table = ({
                                     className={selectedRow === index ? "selected" : ""}
                                     onClick={() => handleRowClick(item, index)}
                                 >
-                                    {numbered && <td style={{width: "50px"}}>{index + 1}</td>}
+                                    {numbered && <td style={{ width: "50px" }}>{index + 1}</td>}
                                     {React.Children.map(children, (child) => {
                                         if (React.isValidElement(child) && child.type === Column) {
                                             const CellComponent = child.props.children[1]?.type || DefaultCell;
@@ -164,25 +164,26 @@ const HeaderCell = ({ children }) => {
 };
 
 // Подкомпонент Cell (по умолчанию отображает данные по ключу dataKey)
-const Cell = ({ dataKey, data, fullText }) => {
-    const value = data[dataKey];
+const Cell = ({ dataKey, data, children = null }) => {
+    if (dataKey) {
+        const value = data[dataKey];
 
-    if (fullText) {
-        return <span>{value}</span>;
+        // Безопасное обрезание текста, если это строка
+        if (typeof value === "string" || Array.isArray(value)) {
+            return <span>{value}</span>;
+        }
+
+        // Если это число, просто отображаем его
+        if (typeof value === "number") {
+            return <span>{value}</span>;
+        }
+
+        // Обработка других типов данных
+        return <span>{value || ""}</span>;
     }
-
-    // Безопасное обрезание текста, если это строка
-    if (typeof value === "string" || Array.isArray(value)) {
-        return <span>{value.slice(0, 20)}</span>;
+    else {
+        return <>{children}</>
     }
-
-    // Если это число, просто отображаем его
-    if (typeof value === "number") {
-        return <span>{value}</span>;
-    }
-
-    // Обработка других типов данных
-    return <span>{value || ""}</span>;
 };
 
 // DefaultCell для fallback (если не указан тип ячейки)

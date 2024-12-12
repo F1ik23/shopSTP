@@ -42,9 +42,9 @@ export function EditButton() {
                 </Modal.Header>
                 <Modal.Body>
                     <Input label="Название" onChange={(e) => setBody({ ...body, name: e })} value={body.name} />
-                    <InputNumber min="1" label="Стоимость" allowDecimal onChange={(e) => setBody({ ...body, cost: e })} value={body.cost} />
-                    <InputNumber min="1" label="Количество (в шт.)" onChange={(e) => setBody({ ...body, count: e })} value={body.count} />
-                    <InputNumber min="1" label="Количество (в кг)" allowDecimal onChange={(e) => setBody({ ...body, countUnit: e })} value={body.countUnit} />
+                    <InputNumber min={1} label="Стоимость" allowDecimal onChange={(e) => setBody({ ...body, cost: e })} value={body.cost} />
+                    <InputNumber min={1} label="Количество (в шт.)" onChange={(e) => setBody({ ...body, count: e })} value={body.count} />
+                    <InputNumber min={1} label="Количество (в кг)" allowDecimal onChange={(e) => setBody({ ...body, countUnit: e })} value={body.countUnit} />
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="action-button" onClick={handleEdit}>Изменить</button>

@@ -22,14 +22,7 @@ function App() {
   const {data, refetch} = useGetRandomClientQuery();
   const dispatch = useDispatch();
 
-  dispatch(actions.createClient(data));
-
-  // useEffect(() => {
-  //   refetch();
-  //   console.log(data);
-    
-  // }, [])
-  
+  // dispatch(actions.createClient(data));
 
   return (
     <div>

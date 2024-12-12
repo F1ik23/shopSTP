@@ -35,9 +35,13 @@ export function EditButton() {
     }
 
     const handleEdit = () => {
-        setClient(body).then(() => {
+        setClient(body).unwrap()
+        .then(() => {
             setOpen(false);
-        });
+        })
+        .catch((error) => {
+            alert(error.data.message);
+        })
     }
 
     return (
@@ -51,7 +55,7 @@ export function EditButton() {
                     <Input label="Имя" onChange={(e) => setBody({ ...body, name: e })} value={body.name} />
                     <MaskedInput mask="+0(000)000-00-00" label="Телефон" onChange={(e) => setBody({ ...body, phone: e })} value={body.phone} />
                     <Select label="Пол" data={sex} onChange={(e) => setBody({ ...body, sex: e })} value={body.sex} />
-                    <InputNumber min="1" max="150" label="Возраст" onChange={(e) => setBody({ ...body, age: e })} value={body.age} />  
+                    <InputNumber min={1} max={150} label="Возраст" onChange={(e) => setBody({ ...body, age: e })} value={body.age} />  
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="action-button" onClick={handleEdit}>Изменить</button>

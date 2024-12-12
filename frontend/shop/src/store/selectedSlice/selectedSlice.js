@@ -23,6 +23,13 @@ export const selectedSlice = createSlice({
                 state.value.countUnit = '';
             }
             else { state.value = item; }
+        },
+        clearSelectedItem: (state) => {
+            state.value.id = '';
+            state.value.name = '';
+            state.value.cost = '';
+            state.value.count = '';
+            state.value.countUnit = '';
         }
     }
 });

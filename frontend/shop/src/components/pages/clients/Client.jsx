@@ -2,7 +2,7 @@ import { useGetClientsQuery } from "../../../store/api/api";
 import { useDispatch } from "react-redux";
 import { ActionBar } from "./ActionBar";
 import { useState } from "react";
-import { actions } from "../../../store/itemsSlice/itemSlice";
+import { actions } from "../../../store/selectedSlice/selectedSlice";
 import Table from "../../diff_comps/Table";
 
 export function Client() {

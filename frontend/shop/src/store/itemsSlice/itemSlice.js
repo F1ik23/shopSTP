@@ -16,6 +16,9 @@ export const itemSlice = createSlice({
             }
             else
                 state.push(item)
+        },
+        clearCart: (state) => {
+            state.length = 0;
         }
     }
 });

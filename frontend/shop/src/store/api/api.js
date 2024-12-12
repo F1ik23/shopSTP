@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import  { QUERY_URL }  from '../../config';
+import { flattenObject  } from '../../services';
+
 
 export const api = createApi({
     reducerPath: 'api',
@@ -31,7 +33,13 @@ export const api = createApi({
             query: () => '/orders/get',
             providesTags: () => [{
                 type: 'Orders'
-            }]
+            }],
+            transformResponse: (response) => {
+                if (Array.isArray(response)) {
+                    return response.map(item => flattenObject(item));
+                }
+                return [];
+            }
         }),
     }),
 })

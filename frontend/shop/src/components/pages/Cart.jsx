@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
 import Modal from "../diff_comps/Modal";
 import { useSetOrderMutation } from "../../store/api/orders.api";
+import { actions } from "../../store/itemsSlice/itemSlice";
 
 export const Cart = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { cart } = useSelector(state => state);
     const client = useSelector(state => state.client.value);
+
+    const dispatch = useDispatch();
 
     const [setOrder] = useSetOrderMutation();
 
@@ -29,6 +32,8 @@ export const Cart = () => {
             }
             setOrder(body).unwrap()
             .then(() => {
+                dispatch(actions.clearCart());
+                alert('Заказ был успешно зарегистрирован!');
                 setIsOpen(false);
             })
             .catch((error) => {
@@ -58,7 +63,7 @@ export const Cart = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <strong>Итого:</strong> {totalPrice} ₽
-                    <button className="order-button" onClick={handleClickOrder}>Заказать</button>
+                    {cart.length > 0 && <button className="order-button" onClick={handleClickOrder}>Заказать</button>}
                 </Modal.Footer>
             </Modal>
         </div>
