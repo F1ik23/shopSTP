@@ -21,16 +21,21 @@ export function EditButton() {
     useEffect(() => {
         setBody(selected);
     }, [selected]);
-    
+
 
     const handleClickEdit = () => {
         setOpen(true);
     }
 
     const handleEdit = () => {
-        setItem(body).then(() => {
-            setOpen(false);
-        });
+        if (body.name !== '' && body.cost !== '' && (body.count !== '' || body.countUnit !== '')) {
+            setItem(body).then(() => {
+                setOpen(false);
+            });
+        }
+        else {
+            alert('Одно из полей не было заполнено.');
+        }
     }
 
     return (

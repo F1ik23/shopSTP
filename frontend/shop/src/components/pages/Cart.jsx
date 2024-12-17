@@ -5,10 +5,9 @@ import Modal from "../diff_comps/Modal";
 import { useSetOrderMutation } from "../../store/api/orders.api";
 import { actions } from "../../store/itemsSlice/itemSlice";
 
-export const Cart = () => {
+export const Cart = ({client}) => {
     const [isOpen, setIsOpen] = useState(false);
     const { cart } = useSelector(state => state);
-    const client = useSelector(state => state.client.value);
 
     const dispatch = useDispatch();
 
@@ -28,7 +27,7 @@ export const Cart = () => {
                 date: new Date(),
                 state: 'WAITING',
                 client: client,
-                items: cart
+                items: cart,
             }
             setOrder(body).unwrap()
             .then(() => {
@@ -56,7 +55,7 @@ export const Cart = () => {
                         {cart.map((item, index) => (
                             <li key={index} className="cart-item">
                                 <span>{item.name}</span>
-                                <span>: стоимость - {item.cost} ₽</span>
+                                <span>: стоимость - {item.cost} x {item.quantity} ₽</span>
                             </li>
                         ))}
                     </ul>

@@ -44,17 +44,15 @@ export function Order() {
                 <Table.Column>
                     <Table.HeaderCell>Заказанные товары</Table.HeaderCell>
                     <Table.Cell>
-                        <ul>
-                            {data && data.map((item, index) => (
-                                <li key={index}>
-                                    <ul>
-                                        {item.items && item.items.map(subItem => (
-                                            <li key={subItem.id}>{subItem.name}</li>
-                                        ))}
-                                    </ul>
-                                </li>
-                            ))}
-                        </ul>
+                            {(rowData) => (
+                                <ul>
+                                    {rowData.items?.map((subItem) => (
+                                        <li key={subItem.id}>
+                                            {subItem.name}: {subItem.count} шт.
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                     </Table.Cell>
                 </Table.Column>
             </Table>

@@ -1,54 +1,4 @@
-// import React from "react";
-// import "../../styles/components/Table.css";
-
-// // Основной компонент Table
-// const Table = ({ data = [], nullData = 'Нет данных для отображения', children }) => {
-//     return (
-//         <div className="table-prod">
-//             <table>
-//                 {/* Заголовки колонок */}
-//                 <thead>
-//                     {React.Children.map(children, (child) =>
-//                         React.isValidElement(child) && child.type === Column ? (
-//                             <th>{child.props.header}</th>
-//                         ) : null
-//                     )}
-//                 </thead>
-//                 {/* Тело таблицы */}
-//                 <tbody>
-//                     {data.length > 0 ? (
-//                         data.map((item, rowIndex) => (
-//                             <tr key={rowIndex}>
-//                                 {React.Children.map(children, (child) =>
-//                                     React.isValidElement(child) && child.type === Column ? (
-//                                         <td>{item[child.props.cell]}</td>
-//                                     ) : null
-//                                 )}
-//                             </tr>
-//                         ))
-//                     ) : (
-//                         <tr>
-//                             <td colSpan={React.Children.count(children)} style={{ textAlign: "center" }}>
-//                                 {nullData}
-//                             </td>
-//                         </tr>
-//                     )}
-//                 </tbody>
-//             </table>
-//         </div>
-//     );
-// };
-
-// // Подкомпонент Column
-// const Column = () => null; // Column используется только для конфигурации, ничего не рендерит
-
-// // Экспорт компонентов
-// Table.Column = Column;
-
-// export default Table;
-
 import React, { useState } from "react";
-import "../../styles/components/Table.css";
 
 // Основной компонент Table
 const Table = ({
@@ -77,17 +27,19 @@ const Table = ({
     const hasData = data && data.length > 0;
 
     const handleRowClick = (item, index) => {
-        if (selectedRow === index) setSelectedRow(null);
-        else {
-            setSelectedRow(index);
+        if (onRowClick) {
+            if (selectedRow === index) setSelectedRow(null);
+            else setSelectedRow(index);
+
+            // Вызовем onRowClick, если он передан
+            onRowClick(item, index);
         }
-        onRowClick(item, index)
     }
 
     return (
         <div
             className={`table-prod ${bordered ? "table-bordered" : ""}`}
-            style={{ height: height || "auto", overflow: virtualized ? "auto" : "visible" }}
+            style={{ maxHeight: height || "auto", overflow: virtualized ? "auto" : "visible" }}
         >
             {loading ? (
                 <div className="table-loading">Загрузка...</div>
@@ -107,7 +59,7 @@ const Table = ({
                                     >
                                         {child.props.children[0]}
                                         {sortable && sortColumn === child.props.dataKey ? (
-                                            <span>{sortType === "asc" ? " ▲" : " ▼"}</span>
+                                            <>{sortType === "asc" ? <span> &and;</span> : <span> &or;</span>}</>
                                         ) : null}
                                     </th>
                                 );
@@ -118,20 +70,28 @@ const Table = ({
                     {/* Тело таблицы */}
                     <tbody>
                         {hasData ? (
-                            data.map((item, index) => (
+                            data.map((rowData, index) => (
                                 <tr
                                     key={index}
                                     className={selectedRow === index ? "selected" : ""}
-                                    onClick={() => handleRowClick(item, index)}
+                                    onClick={() => handleRowClick(rowData, index)}
                                 >
                                     {numbered && <td style={{ width: "50px" }}>{index + 1}</td>}
                                     {React.Children.map(children, (child) => {
                                         if (React.isValidElement(child) && child.type === Column) {
-                                            const CellComponent = child.props.children[1]?.type || DefaultCell;
-                                            const dataKey = child.props.children[1]?.props.dataKey;
+                                            const { dataKey, children: cellChildren } = child.props.children[1]?.props || {};
+
                                             return (
                                                 <td style={{ textAlign: child.props.align }}>
-                                                    <CellComponent dataKey={dataKey} data={item} />
+                                                    {/* Проверка: если есть dataKey, используем его */}
+                                                    {dataKey ? (
+                                                        <span>{rowData[dataKey]}</span>
+                                                    ) : (
+                                                        /* Если children является функцией, вызываем её с rowData */
+                                                        typeof cellChildren === "function"
+                                                            ? cellChildren(rowData) // Передаём текущую строку
+                                                            : cellChildren // Просто рендерим содержимое
+                                                    )}
                                                 </td>
                                             );
                                         }
@@ -163,33 +123,11 @@ const HeaderCell = ({ children }) => {
     return <span>{children}</span>;
 };
 
-// Подкомпонент Cell (по умолчанию отображает данные по ключу dataKey)
-const Cell = ({ dataKey, data, children = null }) => {
-    if (dataKey) {
-        const value = data[dataKey];
-
-        // Безопасное обрезание текста, если это строка
-        if (typeof value === "string" || Array.isArray(value)) {
-            return <span>{value}</span>;
-        }
-
-        // Если это число, просто отображаем его
-        if (typeof value === "number") {
-            return <span>{value}</span>;
-        }
-
-        // Обработка других типов данных
-        return <span>{value || ""}</span>;
-    }
-    else {
-        return <>{children}</>
-    }
+// Подкомпонент Cell (обновленный)
+const Cell = ({ dataKey, children }) => {
+    return children || null;
 };
 
-// DefaultCell для fallback (если не указан тип ячейки)
-const DefaultCell = ({ dataKey, data }) => {
-    return <span>{data[dataKey]}</span>;
-};
 
 // Экспорт компонентов
 Table.Column = Column;

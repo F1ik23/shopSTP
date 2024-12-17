@@ -30,7 +30,7 @@ export const selectedSlice = createSlice({
             state.value.cost = '';
             state.value.count = '';
             state.value.countUnit = '';
-        }
+        },
     }
 });
 

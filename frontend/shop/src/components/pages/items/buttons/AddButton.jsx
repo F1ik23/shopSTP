@@ -23,19 +23,24 @@ export function AddButton() {
         setOpen(true);
     }
     const handleAdd = () => {
-        setItem(body).unwrap().then(() => {
-            setOpen(false);
-            body.name = '';
-            body.cost = '';
-            body.count = '';
-            body.countUnit = '';
-        })
-        .catch((error) => {
-            if(error.status === 'FETCH_ERROR') {
-                alert('Проблема с подключением к серверу');
-            }
-            else alert(error.status + ' ' + error.data.message)
-        })
+        if (body.name !== '' && body.cost !== '' && (body.count !== '' || body.countUnit !== '')) {
+            setItem(body).unwrap().then(() => {
+                setOpen(false);
+                body.name = '';
+                body.cost = '';
+                body.count = '';
+                body.countUnit = '';
+            })
+                .catch((error) => {
+                    if (error.status === 'FETCH_ERROR') {
+                        alert('Проблема с подключением к серверу');
+                    }
+                    else alert(error.status + ' ' + error.data.message)
+                })
+        }
+        else {
+            alert('Одно из полей не было заполнено.');
+        }
 
     }
 

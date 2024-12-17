@@ -3,10 +3,7 @@ package com.example.shop.repository;
 import com.example.shop.entity.Client;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -31,14 +28,28 @@ public class ClientRepository {
     public Long save(Client client) {
         if (client.getId() == null) {
             entityManager.persist(client);}
-        else entityManager.merge(client);
+        else {
+            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+            CriteriaUpdate<Client> update = cb.createCriteriaUpdate(Client.class);
+            Root<Client> root = update.from(Client.class);
+            update.set("name", client.getName());
+            update.set("phone", client.getPhone());
+            update.set("age", client.getAge());
+            update.set("sex", client.getPhone());
+            update.where(cb.equal(root.get("id"), client.getId()));
+            entityManager.createQuery(update).executeUpdate();
+        }
         return client.getId();
     }
 
     @Transactional
     public void delete(Client client) {
-        Client foundClient = entityManager.find(Client.class, client.getId());
-        entityManager.remove(foundClient);
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaDelete<Client> delete = cb.createCriteriaDelete(Client.class);
+        Root<Client> root = delete.from(Client.class);
+        delete.where(cb.equal(root.get("id"), client.getId()));
+        entityManager.createQuery(delete).executeUpdate();
+
     }
 
     public Client getRandomClient() {

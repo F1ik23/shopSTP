@@ -19,7 +19,7 @@ export function EditButton() {
     const disable = selected.name === '' ? true : false;
 
     const sex = [
-        { label: 'Мужской', value: 'Мужской' }, 
+        { label: 'Мужской', value: 'Мужской' },
         { label: 'Женский', value: 'Женский' }
     ]
 
@@ -28,20 +28,25 @@ export function EditButton() {
     useEffect(() => {
         setBody(selected);
     }, [selected]);
-    
+
 
     const handleClickEdit = () => {
         setOpen(true);
     }
 
     const handleEdit = () => {
-        setClient(body).unwrap()
-        .then(() => {
-            setOpen(false);
-        })
-        .catch((error) => {
-            alert(error.data.message);
-        })
+        if (body.name !== '' && body.phone !== '' && body.age !== '' && body.sex !== '') {
+            setClient(body).unwrap()
+                .then(() => {
+                    setOpen(false);
+                })
+                .catch((error) => {
+                    alert(error.data.message);
+                })
+        }
+        else {
+            alert('Одно из полей не было заполнено.')
+        }
     }
 
     return (
@@ -55,7 +60,7 @@ export function EditButton() {
                     <Input label="Имя" onChange={(e) => setBody({ ...body, name: e })} value={body.name} />
                     <MaskedInput mask="+0(000)000-00-00" label="Телефон" onChange={(e) => setBody({ ...body, phone: e })} value={body.phone} />
                     <Select label="Пол" data={sex} onChange={(e) => setBody({ ...body, sex: e })} value={body.sex} />
-                    <InputNumber min={1} max={150} label="Возраст" onChange={(e) => setBody({ ...body, age: e })} value={body.age} />  
+                    <InputNumber min={1} max={150} label="Возраст" onChange={(e) => setBody({ ...body, age: e })} value={body.age} />
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="action-button" onClick={handleEdit}>Изменить</button>

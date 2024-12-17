@@ -1,17 +1,17 @@
 import { MdEdit } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import Input from "../../../diff_comps/Input";
-import InputNumber from "../../../diff_comps/InputNumber";
 import Modal from "../../../diff_comps/Modal";
-import { useSetItemMutation } from "../../../../store/api/items.api";
+import Select from "../../../diff_comps/Select";
+import { useSetOrderMutation } from "../../../../store/api/orders.api";
+import { parseDateString } from "../../../../services";
 
 
 export function EditButton() {
 
     const selected = useSelector(state => state.selected.value);
     const [open, setOpen] = useState(false);
-    const [setItem] = useSetItemMutation();
+    const [setOrder] = useSetOrderMutation();
 
     const classButton = selected.id === '' ? 'disabled-button' : 'action-button';
     const disable = selected.id === '' ? true : false;
@@ -21,6 +21,16 @@ export function EditButton() {
     useEffect(() => {
         setBody(selected);
     }, [selected]);
+
+    const states = [
+            {value: 'COMPLETED', label: "Завершено"},
+            {value: 'NOT_COMPLETED', label: "Не завершено"},
+            {value: 'WAITING', label: "Ожидает оплаты"},
+            {value: 'PAID', label: "Оплачено"},
+            {value: 'AWAITING_DEPARTURE', label: "Ожидает отправки"},
+            {value: 'SENT', label: "Отправлено"},
+            {value: 'HANDED', label: "Вручено"}
+    ]
     
 
     const handleClickEdit = () => {
@@ -28,9 +38,11 @@ export function EditButton() {
     }
 
     const handleEdit = () => {
-        setItem(body).then(() => {
+        body.date = parseDateString(body.date);
+        setOrder(body).then(() => {
             setOpen(false);
         });
+        setBody(selected);
     }
 
     return (
@@ -41,10 +53,18 @@ export function EditButton() {
                     <h2>Редактирование</h2>
                 </Modal.Header>
                 <Modal.Body>
-                    <Input label="Название" onChange={(e) => setBody({ ...body, name: e })} value={body.name} />
-                    <InputNumber min={1} label="Стоимость" allowDecimal onChange={(e) => setBody({ ...body, cost: e })} value={body.cost} />
-                    <InputNumber min={1} label="Количество (в шт.)" onChange={(e) => setBody({ ...body, count: e })} value={body.count} />
-                    <InputNumber min={1} label="Количество (в кг)" allowDecimal onChange={(e) => setBody({ ...body, countUnit: e })} value={body.countUnit} />
+                    <div className="order-edit">
+                    <span className="order-text">Номер заказа: {body.id}</span>
+                    <span className="order-text">Заказчик: {body.name}</span>
+                    <span className="order-text">Дата заказа: {body.date}</span>
+                    <Select label="Состояние" data={states} onChange={(e) => setBody({ ...body, state: e })} style={{width: '100%'}} />
+                    <span className="order-text">Заказанные товары:</span>
+                    <ul>
+                    {body.items?.map(item => (
+                        <li key={item.id}>{item.name}</li>
+                    ))}
+                    </ul>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="action-button" onClick={handleEdit}>Изменить</button>

@@ -15,7 +15,7 @@ export function AddButton() {
     const [setClient] = useSetClientMutation();
 
     const sex = [
-        { label: 'Мужской', value: 'Мужской' }, 
+        { label: 'Мужской', value: 'Мужской' },
         { label: 'Женский', value: 'Женский' }
     ]
 
@@ -30,15 +30,20 @@ export function AddButton() {
         setOpen(true);
     }
     const handleAdd = () => {
-        setClient(body).unwrap()
-        .then(() => {
-            setOpen(false);
-            body.name = '';
-            body.phone = '';
-            body.age = '';
-            body.sex = '';
-        })
-        .catch((error) => alert(error.status + ' ' + error.data.message))
+        if (body.name !== '' && body.phone !== '' && body.age !== '' && body.sex !== '') {
+            setClient(body).unwrap()
+                .then(() => {
+                    setOpen(false);
+                    body.name = '';
+                    body.phone = '';
+                    body.age = '';
+                    body.sex = '';
+                })
+                .catch((error) => alert(error.status + ' ' + error.data.message))
+        }
+        else {
+            alert('Одно из полей не было заполнено.')
+        }
     }
 
     return (
@@ -52,7 +57,7 @@ export function AddButton() {
                     <Input label="Имя" onChange={(e) => setBody({ ...body, name: e })} />
                     <MaskedInput value="+7" mask="+0(000)000-00-00" label="Телефон" onChange={(e) => setBody({ ...body, phone: e })} />
                     <Select label="Пол" data={sex} onChange={(e) => setBody({ ...body, sex: e })} />
-                    <InputNumber min="1" max="150" label="Возраст" onChange={(e) => setBody({ ...body, age: e })} />                    
+                    <InputNumber min="1" max="150" label="Возраст" onChange={(e) => setBody({ ...body, age: e })} />
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="action-button" onClick={handleAdd}>Добавить</button>

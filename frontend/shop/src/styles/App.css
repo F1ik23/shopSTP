@@ -40,6 +40,7 @@
 .link {
   position: relative;
 }
+
 .link::after {
   position: absolute;
   content: '';
@@ -55,6 +56,35 @@
   width: 0;
   transition: 0.3s;
 }
+
 .link:hover:after {
+  width: 100%;
+}
+
+.order-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1.3em;
+  align-items: center;
+  position: relative;
+}
+
+.order-text {
+  display: block;
+  word-wrap: break-word;
+  min-width: 150px;
+}
+
+.order-state {
+  width: 100%;
+    padding: 5px 12px;
+}
+
+.order-edit .input-label {
+  font-size: 1.1em;
+}
+
+.order-edit .select-header {
   width: 100%;
 }

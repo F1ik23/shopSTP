@@ -30,6 +30,8 @@ import java.util.List;
 
     private State state;
 
+    private Integer quantity;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

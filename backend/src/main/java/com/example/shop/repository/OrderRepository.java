@@ -1,11 +1,9 @@
 package com.example.shop.repository;
 
+import com.example.shop.entity.Item;
 import com.example.shop.entity.Order;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -31,14 +29,27 @@ public class OrderRepository {
     public Long save(Order order) {
         if (order.getId() == null) {
             entityManager.persist(order);}
-        else entityManager.merge(order);
+        else {
+            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+            CriteriaUpdate<Order> update = cb.createCriteriaUpdate(Order.class);
+            Root<Order> root = update.from(Order.class);
+            update.set("date", order.getDate());
+            update.set("state", order.getState());
+            update.set("quantity", order.getQuantity());
+            //update.set("countUnit", order.getCountUnit());
+            update.where(cb.equal(root.get("id"), order.getId()));
+            entityManager.createQuery(update).executeUpdate();
+        }
         return order.getId();
     }
 
     @Transactional
     public void delete(Order order) {
-        Order foundOrder = entityManager.find(Order.class, order.getId());
-        entityManager.remove(foundOrder);
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaDelete<Order> delete = cb.createCriteriaDelete(Order.class);
+        Root<Order> root = delete.from(Order.class);
+        delete.where(cb.equal(root.get("id"), order.getId()));
+        entityManager.createQuery(delete).executeUpdate();
     }
 
 }

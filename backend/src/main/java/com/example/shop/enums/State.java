@@ -7,10 +7,10 @@ import lombok.Getter;
 public enum State {
 
     COMPLETED ("Завершено"),
-    NOTCOMPLETED ("Не завершено"),
+    NOT_COMPLETED ("Не завершено"),
     WAITING ("Ожидает оплаты"),
     PAID ("Оплачено"),
-    AWAITINGDEPARTURE ("Ожидает отправки"),
+    AWAITING_DEPARTURE ("Ожидает отправки"),
     SENT ("Отправлено"),
     HANDED ("Вручено");
 
