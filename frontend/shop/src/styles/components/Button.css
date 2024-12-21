@@ -21,6 +21,14 @@
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
+.action-button:disabled {
+    background-color: #f0f0f0; /* светло-серый фон */
+    color: #b0b0b0; /* светло-серый текст */
+    border: 1px solid #d0d0d0; /* светло-серый бордер */
+    cursor: not-allowed; /* курсор "не доступно" */
+    opacity: 0.6; /* полупрозрачность для отключенной кнопки */
+}
+
 .disabled-button {
     background-color: #747474;
     color: #333333;

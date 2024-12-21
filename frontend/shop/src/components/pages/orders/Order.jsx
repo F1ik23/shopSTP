@@ -48,7 +48,10 @@ export function Order() {
                                 <ul>
                                     {rowData.items?.map((subItem) => (
                                         <li key={subItem.id}>
-                                            {subItem.name}: {subItem.count} шт.
+                                            <p>{subItem.item.name}:</p> 
+                                            <div className="order-list">
+                                            <span>{subItem.count} шт.</span> <span>{subItem.countUnit} кг.</span> <span>(К оплате: {subItem.item.cost * (subItem.count + subItem.countUnit)})</span>
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>

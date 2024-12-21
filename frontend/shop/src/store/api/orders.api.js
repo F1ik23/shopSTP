@@ -10,9 +10,7 @@ export const orderApi = api.injectEndpoints({
                 body: body,
                 mode: 'cors'
             }),
-            invalidatesTags: () => [{
-                type: 'Orders',
-            }],
+            invalidatesTags: ['Orders', 'Items'],
         }),
         deleteOrder: builder.mutation({
             query: (body) => ({
