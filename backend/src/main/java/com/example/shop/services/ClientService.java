@@ -20,7 +20,7 @@ public class ClientService {
             return allClients;
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Невозможно получить список всех клиентов.");
         }
     }
 
@@ -33,7 +33,7 @@ public class ClientService {
             clientRepository.delete(client);
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Нельзя удалить этого клиента из базы, так как он совершил заказ.");
         }
     }
 

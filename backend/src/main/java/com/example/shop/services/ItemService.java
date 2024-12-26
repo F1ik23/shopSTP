@@ -20,7 +20,7 @@ public class ItemService {
             return allItems;
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Невозможно получить список товаров на складе.");
         }
     }
 
@@ -33,7 +33,7 @@ public class ItemService {
             itemRepository.delete(item);
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Этот товар нельзя удалить, так как существуют заказы, связанные с ним.");
         }
     }
 }

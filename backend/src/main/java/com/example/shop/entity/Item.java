@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -27,9 +30,9 @@ public class Item {
 
     private Double countUnit;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orders_id")
-    private Order order;
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JoinColumn(name = "itemorders_id")
+    private List<ItemOrder> items = new ArrayList<>();
 
     public Item(Double cost, String name, Integer count, Double countUnit) {
         this.cost = cost;

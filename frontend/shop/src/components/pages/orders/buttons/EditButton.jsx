@@ -61,7 +61,7 @@ export function EditButton() {
                     <span className="order-text">Заказанные товары:</span>
                     <ul>
                     {body.items?.map(item => (
-                        <li key={item.id}>{item.name}</li>
+                        <li key={item.id}>{item.item.name}</li>
                     ))}
                     </ul>
                     </div>

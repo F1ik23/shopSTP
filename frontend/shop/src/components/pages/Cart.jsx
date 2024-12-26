@@ -15,7 +15,7 @@ export const Cart = ({client}) => {
 
     const toggleCart = () => setIsOpen(!isOpen);
 
-    const totalPrice = cart.reduce((total, item) => total + item.cost, 0);
+    const totalPrice = cart.reduce((total, item) => total + item.price * (item.count + item.countUnit), 0);
 
     const handleClickOrder = () => {
         if (cart.length > 0) {
@@ -55,7 +55,7 @@ export const Cart = ({client}) => {
                         {cart.map((item, index) => (
                             <li key={index} className="cart-item">
                                 <span>{item.name}</span>
-                                <span>: стоимость - {item.cost} x {item.quantity} ₽</span>
+                                <span>: стоимость - {item.price} x {item.count + item.countUnit} ₽</span>
                             </li>
                         ))}
                     </ul>

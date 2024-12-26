@@ -88,3 +88,8 @@
 .order-edit .select-header {
   width: 100%;
 }
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+}

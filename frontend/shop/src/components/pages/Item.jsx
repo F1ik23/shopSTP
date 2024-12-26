@@ -4,25 +4,55 @@ import { useGetItemsQuery } from "../../store/api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../store/itemsSlice/itemSlice";
 import { useGetRandomClientQuery } from '../../store/api/clients.api';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import InputNumber from '../diff_comps/InputNumber';
 
 const GridItem = ({ item, cart }) => {
 
     const [choosed, setChoosed] = useState(1);
+    const [choosedUnit, setChoosedUnit] = useState(0.0);
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        setCartItem({
+            item_id: item.id,
+            item: item,
+            name: item.name,
+            price: item.cost,
+            count: item.count > 0 ? choosed : 0,
+            countUnit: item.countUnit > 0 ? choosedUnit : 0,
+        });
+    }, [choosed, choosedUnit, item]);
+
+    const [cartItem, setCartItem] = useState({
+        item_id: item.id,
+        item: item,
+        name: item.name,
+        price: item.cost,
+        count: item.count > 0 ? choosed : 0,
+        countUnit: item.countUnit > 0 ? choosedUnit : 0,
+    });
+
+    const handleAddToCart = useCallback(() => {
+        dispatch(actions.addToCartItem({...cartItem}));
+        
+        // Используем функциональную форму для гарантии актуального состояния
+        setChoosed(() => 1);
+        setChoosedUnit(() => 0.0);
+    }, [cartItem, dispatch]);
+
     const minusChoosed = () => {
         if (choosed === 1) return;
-        else setChoosed(choosed - 1);
+        setChoosed(prev => prev - 1);
     }
 
     const plusChoosed = () => {
         if (choosed === item.count) return;
-        else setChoosed(choosed + 1);
+        setChoosed(prev => prev + 1);
     }
 
-    const isExists = cart.some(r => r.id === item.id);
+    const isExists = cart.some(r => r.item_id === cartItem.item_id);
 
     return (
         <div className="item-card">
@@ -33,9 +63,10 @@ const GridItem = ({ item, cart }) => {
                 <p>Стоимость: {item.cost}</p>
             </div>
             <div className="add-to-cart">
-                <button className="action-button" onClick={minusChoosed} >&minus;</button>{choosed}<button className="action-button" onClick={plusChoosed}>+</button>
-            </div>
-            <button className="action-button" onClick={() => { dispatch(actions.addToCartItem(item))}} >
+                <button className="action-button"  onClick={minusChoosed} disabled={item.count > 0 ? false : true} >&minus;</button>{choosed} шт.<button className="action-button" disabled={item.count > 0 ? false : true} onClick={plusChoosed}>+</button>
+                </div>
+            <InputNumber min={0.0} max={item.countUnit} allowDecimal placeholder='Для заказа в кг.' disabled={item.countUnit > 0.0 ? false : true} onChange={(e) => setChoosedUnit(e)} />
+            <button className="action-button" onClick={handleAddToCart} disabled={item.count || item.countUnit > 0 ? false : true}>
                 {!isExists ? (<><MdAddShoppingCart />  <span>В корзину</span></>) : (<><MdOutlineRemoveShoppingCart />  <span>Убрать из корзины</span></>)}
             </button>
         </div>

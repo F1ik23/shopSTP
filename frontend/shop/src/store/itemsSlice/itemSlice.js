@@ -7,9 +7,9 @@ export const itemSlice = createSlice({
     initialState,
     reducers: {
         addToCartItem: (state, { payload: item }) => {
-            const isExists = state.some (r => r.id === item.id)
+            const isExists = state.some (r => r.item_id === item.item_id)
             if(isExists) {
-                const index = state.findIndex(items => items.id === item.id)
+                const index = state.findIndex(items => items.item_id === item.item_id)
                 if (index !== -1) {
                     state.splice(index, 1);
                 }
