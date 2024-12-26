@@ -25,6 +25,28 @@ public class ClientService {
     }
 
     public void setClient(Client client) {
+        if (client == null) {
+            throw new IllegalArgumentException("Клиент не может быть null");
+        }
+        if (client.getName() == null || client.getName().isEmpty()) {
+            throw new IllegalArgumentException("Имя клиента не может быть пустым");
+        }
+        if (client.getPhone() == null) {
+            throw new IllegalArgumentException("Телефон клиента не может быть null");
+        }
+        if (!client.getPhone().matches("\\+7\\(\\d{3}\\)\\d{3}-\\d{2}-\\d{2}")) {
+            throw new IllegalArgumentException("Неверный формат телефона. Номер должен начинаться с + и содержать только цифры");
+        }
+        if (client.getAge() == null) {
+            throw new IllegalArgumentException("Возраст клиента не может быть null");
+        }
+        if (client.getAge() < 0) {
+            throw new IllegalArgumentException("Возраст клиента не может быть отрицательным");
+        }
+        if (client.getSex() == null) {
+            throw new IllegalArgumentException("Пол клиента не может быть null");
+        }
+
         clientRepository.save(client);
     }
 

@@ -38,22 +38,23 @@ public class OrderService {
                 Item item = ios.getItem();
                 ios.setItem(item);
                 orderRepository.save(ios);
-                if (ios.getCountUnit() == null) {
-                    ios.setCountUnit(0.0);
+
+                if (ios.getCountUnit() == null) ios.setCountUnit(0.0);
+                if (ios.getCount() == null) ios.setCount(0);
+                if (item.getCountUnit() == null) item.setCountUnit(0.0);
+                if (item.getCount() == null) item.setCount(0);
+
+                if (item.getCount() < ios.getCount() || item.getCountUnit() < ios.getCountUnit()) {
+                    throw new IllegalArgumentException("Недостаточное количество товара на складе");
                 }
-                if (ios.getCount() == null) {
-                    ios.setCount(0);
-                }
-                if (item.getCountUnit() == null) {
-                    item.setCountUnit(0.0);
-                }
-                if (item.getCount() == null) {
-                    item.setCount(0);
-                }
+
                 item.setCount(item.getCount() - ios.getCount());
                 item.setCountUnit(item.getCountUnit() - ios.getCountUnit());
                 itemRepository.save(item);
             }
+        }
+        catch (IllegalArgumentException ex) {
+            throw ex;
         }
         catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());

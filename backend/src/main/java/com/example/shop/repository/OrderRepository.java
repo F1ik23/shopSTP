@@ -17,12 +17,6 @@ public class OrderRepository {
     private EntityManager entityManager;
 
     public List<Order> getAllOrders() {
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<Order> query = cb.createQuery(Order.class);
-//        Root<Order> root = query.from(Order.class);
-//        root.fetch("items", JoinType.LEFT);
-//        query.select(root);
-//        return entityManager.createQuery(query).getResultList();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Order> query = cb.createQuery(Order.class);
         Root<Order> root = query.from(Order.class);
