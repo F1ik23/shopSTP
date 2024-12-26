@@ -4,6 +4,7 @@ import com.example.shop.entity.Item;
 import com.example.shop.entity.ItemOrder;
 import com.example.shop.entity.Order;
 import com.example.shop.repository.ItemRepository;
+import com.example.shop.repository.ItemRepository;
 import com.example.shop.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.List;
 public class OrderService {
 
     private OrderRepository orderRepository;
+    private ItemRepository itemRepository;
     private ItemRepository itemRepository;
 
     public List<Order> getAllOrders() {
