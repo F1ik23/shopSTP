@@ -23,12 +23,6 @@ public class OrderRepository {
 //        root.fetch("items", JoinType.LEFT);
 //        query.select(root);
 //        return entityManager.createQuery(query).getResultList();
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<Order> query = cb.createQuery(Order.class);
-//        Root<Order> root = query.from(Order.class);
-//        root.fetch("items", JoinType.LEFT);
-//        query.select(root);
-//        return entityManager.createQuery(query).getResultList();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Order> query = cb.createQuery(Order.class);
         Root<Order> root = query.from(Order.class);
@@ -41,8 +35,6 @@ public class OrderRepository {
     @Transactional
     public Long save(Order order) {
         if (order.getId() == null) {
-            entityManager.persist(order);
-        }
             entityManager.persist(order);
         }
         else {

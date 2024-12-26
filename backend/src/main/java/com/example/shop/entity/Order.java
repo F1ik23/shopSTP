@@ -2,7 +2,6 @@ package com.example.shop.entity;
 
 import com.example.shop.enums.State;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,14 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Order {
-@Table(name = "Orders")
-@Getter
-@Setter
-public class Order {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
